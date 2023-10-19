@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #carousel {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #imgs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2500px;
+        }
+
+        #imgs>img {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="carousel">
+        <div id="imgs">
+            <img src="https://picsum.photos/500/?random=1">
+            <img src="https://picsum.photos/500/?random=2">
+            <img src="https://picsum.photos/500/?random=3">
+            <img src="https://picsum.photos/500/?random=4">
+            <img src="https://picsum.photos/500/?random=5">
+        </div>
+    </div>
+    <input type="button" value="&lt;" id="btn-left">
+    <input type="button" value="&gt;" id="btn-right">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='crossorigin='anonymous'></script>
+    <script>
+        // 目前顯示的圖片索引
+        let now = 0
+        $('#btn-right').click(function () {
+            // now  下一張的索引  總張數 下一張的left
+            // 0    1<5 true     5      -500
+            // 1    2<5 true     5      -1000
+            // 2    3<5 true     5      -1500
+            // 3    4<5 true     5      -2000
+            // 4    5<5 false    5
+            if(now+1<5){   
+            now++
+            $('#imgs').stop(true,true)
+            .animate({ left: now * -500 - 25})
+            .animate({ left: now * -500  })
+        }
+        })
+        $('#btn-left').click(function () {
+            if (now-1 >= 0) {
+        now--;
+        $('#imgs').stop(true,true)
+        .animate({ left: now * -500 +25})
+        .animate({ left: now * -500 });
+    }
+        })
+    </script>
+</body>
+
+</html>
